@@ -1,0 +1,145 @@
+
+import React, { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { ArrowLeft, Star, ShoppingCart } from 'lucide-react';
+import { Product } from '../types';
+import { fetchProduct } from '../services/api';
+import { useCart } from '../contexts/CartContext';
+import LoadingSpinner from '../components/LoadingSpinner';
+import Header from '../components/Header';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent } from '@/components/ui/card';
+
+const ProductDetail = () => {
+  const { id } = useParams<{ id: string }>();
+  const [product, setProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState(true);
+  const { addToCart } = useCart();
+
+  useEffect(() => {
+    const loadProduct = async () => {
+      if (!id) return;
+      
+      try {
+        setLoading(true);
+        const productData = await fetchProduct(parseInt(id));
+        setProduct(productData);
+      } catch (error) {
+        console.error('Error loading product:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProduct();
+  }, [id]);
+
+  const handleAddToCart = () => {
+    if (product) {
+      addToCart(product);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <Header onCategoryChange={() => {}} selectedCategory="all" />
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
+  if (!product) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <Header onCategoryChange={() => {}} selectedCategory="all" />
+        <div className="container mx-auto px-4 py-8 text-center">
+          <h1 className="text-2xl font-bold text-gray-800 mb-4">Produto não encontrado</h1>
+          <Link to="/">
+            <Button>Voltar à loja</Button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <Header onCategoryChange={() => {}} selectedCategory="all" />
+      
+      <main className="container mx-auto px-4 py-8">
+        <Link to="/" className="inline-flex items-center text-blue-600 hover:text-blue-800 mb-6">
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          Voltar à loja
+        </Link>
+
+        <Card className="overflow-hidden">
+          <CardContent className="p-0">
+            <div className="grid md:grid-cols-2 gap-8 p-8">
+              <div className="space-y-4">
+                <img
+                  src={product.image}
+                  alt={product.title}
+                  className="w-full max-w-md mx-auto object-contain bg-gray-50 rounded-lg"
+                />
+              </div>
+
+              <div className="space-y-6">
+                <div>
+                  <Badge className="mb-3 bg-blue-100 text-blue-800">
+                    {product.category}
+                  </Badge>
+                  <h1 className="text-3xl font-bold text-gray-800 mb-4">
+                    {product.title}
+                  </h1>
+                  
+                  <div className="flex items-center space-x-2 mb-4">
+                    <div className="flex items-center">
+                      {[...Array(5)].map((_, i) => (
+                        <Star
+                          key={i}
+                          className={`w-5 h-5 ${
+                            i < Math.floor(product.rating.rate)
+                              ? 'fill-yellow-400 text-yellow-400'
+                              : 'text-gray-300'
+                          }`}
+                        />
+                      ))}
+                    </div>
+                    <span className="text-sm text-gray-600">
+                      {product.rating.rate} ({product.rating.count} avaliações)
+                    </span>
+                  </div>
+
+                  <p className="text-4xl font-bold text-blue-600 mb-6">
+                    ${product.price.toFixed(2)}
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="text-lg font-semibold mb-3">Descrição</h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    {product.description}
+                  </p>
+                </div>
+
+                <div className="flex space-x-4">
+                  <Button
+                    onClick={handleAddToCart}
+                    className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                  >
+                    <ShoppingCart className="w-5 h-5 mr-2" />
+                    Adicionar ao Carrinho
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </main>
+    </div>
+  );
+};
+
+export default ProductDetail;

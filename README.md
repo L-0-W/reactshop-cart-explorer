@@ -1,73 +1,91 @@
-# Welcome to your Lovable project
 
-## Project info
+# ReactShop - Mini E-commerce
 
-**URL**: https://lovable.dev/projects/fbd1d3b6-ffc7-4e6c-9f9e-d35b9c8bb013
+Um protótipo funcional de loja virtual desenvolvido com React e TypeScript, consumindo dados da Fake Store API.
 
-## How can I edit this code?
+## 🚀 Funcionalidades
 
-There are several ways of editing your application.
+- **Listagem de Produtos**: Visualização de todos os produtos em cards responsivos
+- **Detalhes do Produto**: Página detalhada com informações completas
+- **Filtro por Categoria**: Sistema de filtros por categoria de produtos
+- **Carrinho de Compras**: Adição, remoção e gerenciamento de produtos no carrinho
+- **Design Responsivo**: Interface adaptada para desktop e mobile
 
-**Use Lovable**
+## 🛠️ Tecnologias Utilizadas
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/fbd1d3b6-ffc7-4e6c-9f9e-d35b9c8bb013) and start prompting.
+- **React 18** com TypeScript
+- **React Router** para navegação
+- **Axios** para consumo da API
+- **Context API** para gerenciamento de estado
+- **Tailwind CSS** para estilização
+- **shadcn/ui** para componentes
+- **Fake Store API** como fonte de dados
 
-Changes made via Lovable will be committed automatically to this repo.
+## 📋 Conceitos Aplicados
 
-**Use your preferred IDE**
+- ✅ `useState` e `useEffect` para controle de estado e ciclo de vida
+- ✅ Navegação com React Router (BrowserRouter, Routes, Route, useParams)
+- ✅ Consumo de API com axios
+- ✅ Context API para estado global
+- ✅ TypeScript para tipagem
+- ✅ Componentes reutilizáveis
+- ✅ Design responsivo
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 🌐 API Endpoints Utilizados
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- `GET /products` - Lista todos os produtos
+- `GET /products/:id` - Detalhes de um produto específico
+- `GET /products/categories` - Lista todas as categorias
+- `GET /products/category/:category` - Produtos de uma categoria específica
 
-Follow these steps:
+## 🎨 Design e UX
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- Interface moderna com gradientes e animações
+- Cards de produtos com hover effects
+- Loading states para melhor experiência
+- Sistema de navegação intuitivo
+- Feedback visual para ações do usuário
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## 📱 Funcionalidades do Carrinho
 
-# Step 3: Install the necessary dependencies.
-npm i
+- Adicionar produtos ao carrinho
+- Alterar quantidade de itens
+- Remover produtos do carrinho
+- Visualizar total da compra
+- Contador de itens no header
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+## 🔧 Como Executar
+
+```bash
+# Clone o repositório
+git clone <URL_DO_REPOSITORIO>
+
+# Navegue até o diretório
+cd reactshop
+
+# Instale as dependências
+npm install
+
+# Execute o projeto
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## 📂 Estrutura do Projeto
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```
+src/
+├── components/          # Componentes reutilizáveis
+├── contexts/           # Context API (CartContext)
+├── pages/              # Páginas da aplicação
+├── services/           # Serviços para API
+├── types/              # Tipos TypeScript
+└── App.tsx             # Componente principal
+```
 
-**Use GitHub Codespaces**
+## 👥 Autor
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Desenvolvido como trabalho prático de Frontend React.
 
-## What technologies are used for this project?
+---
 
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/fbd1d3b6-ffc7-4e6c-9f9e-d35b9c8bb013) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+**ReactShop** - Demonstrando as melhores práticas de desenvolvimento React com uma aplicação real e funcional.
