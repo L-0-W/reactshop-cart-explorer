@@ -39,29 +39,28 @@ const Products = () => {
     setSelectedCategory(category);
   };
 
-  // Memoizar o contador para evitar re-renders desnecessários
   const productCount = useMemo(() => products.length, [products.length]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
       <Header onCategoryChange={handleCategoryChange} selectedCategory={selectedCategory} />
       
-      <main className="container mx-auto px-4 py-8">
-        {/* Hero Section simplificado */}
-        <div className="text-center mb-12">
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/40">
-            <div className="flex justify-center mb-4">
-              <ShoppingBag className="w-12 h-12 text-purple-600" />
+      <main className="container mx-auto px-3 sm:px-4 lg:px-6 py-4 sm:py-6 lg:py-8">
+        {/* Hero Section responsivo */}
+        <div className="text-center mb-8 sm:mb-10 lg:mb-12">
+          <div className="bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 shadow-lg border border-white/40">
+            <div className="flex justify-center mb-3 sm:mb-4">
+              <ShoppingBag className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-purple-600" />
             </div>
             
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3 sm:mb-4">
               🌟 Bem-vindo à ReactShop! 🌟
             </h1>
             
-            <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base lg:text-lg text-gray-700 max-w-2xl mx-auto px-2">
               Descubra produtos incríveis com os melhores preços! ✨
               {selectedCategory !== 'all' && (
-                <span className="block mt-2 text-xl font-semibold text-purple-600">
+                <span className="block mt-2 text-base sm:text-lg lg:text-xl font-semibold text-purple-600">
                   📂 Categoria: {selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1)}
                 </span>
               )}
@@ -73,17 +72,17 @@ const Products = () => {
           <LoadingSpinner />
         ) : (
           <>
-            {/* Contador de produtos */}
-            <div className="flex items-center justify-center mb-6">
-              <div className="bg-white/80 backdrop-blur-sm rounded-full px-6 py-2 shadow-md border border-white/40">
-                <span className="text-base font-medium text-gray-700">
+            {/* Contador de produtos responsivo */}
+            <div className="flex items-center justify-center mb-4 sm:mb-6">
+              <div className="bg-white/80 backdrop-blur-sm rounded-full px-4 sm:px-6 py-2 shadow-md border border-white/40">
+                <span className="text-sm sm:text-base font-medium text-gray-700">
                   🎯 {productCount} produto{productCount !== 1 ? 's' : ''} encontrado{productCount !== 1 ? 's' : ''}
                 </span>
               </div>
             </div>
             
-            {/* Grid de produtos otimizado */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {/* Grid responsivo otimizado */}
+            <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 sm:gap-4 lg:gap-6">
               {products.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
