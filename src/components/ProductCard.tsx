@@ -1,7 +1,7 @@
 
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { Link } from 'react-router-dom';
-import { Star, ShoppingCart, Heart, Sparkles } from 'lucide-react';
+import { Star, ShoppingCart, Heart } from 'lucide-react';
 import { Product } from '../types';
 import { useCart } from '../contexts/CartContext';
 import { Button } from '@/components/ui/button';
@@ -12,7 +12,7 @@ interface ProductCardProps {
   product: Product;
 }
 
-const ProductCard = ({ product }: ProductCardProps) => {
+const ProductCard = memo(({ product }: ProductCardProps) => {
   const { addToCart } = useCart();
   const [isLiked, setIsLiked] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
@@ -22,11 +22,11 @@ const ProductCard = ({ product }: ProductCardProps) => {
     e.stopPropagation();
     setIsAdding(true);
     
-    // Simula um delay para mostrar a animação
+    // Reduzido o delay para melhor responsividade
     setTimeout(() => {
       addToCart(product);
       setIsAdding(false);
-    }, 600);
+    }, 300);
   };
 
   const handleLike = (e: React.MouseEvent) => {
@@ -46,40 +46,36 @@ const ProductCard = ({ product }: ProductCardProps) => {
   };
 
   return (
-    <Card className="group overflow-hidden card-hover shine-effect glass-effect border-white/20 backdrop-blur-sm animate-slide-in-up">
+    <Card className="group overflow-hidden hover:shadow-lg transition-shadow duration-300 bg-white/90 backdrop-blur-sm border border-gray-200">
       <Link to={`/produto/${product.id}`}>
-        <div className="relative overflow-hidden bg-gradient-to-br from-white/50 to-gray-50/50">
+        <div className="relative overflow-hidden bg-white">
           <img
             src={product.image}
             alt={product.title}
-            className="w-full h-64 object-contain p-4 group-hover:scale-110 transition-transform duration-500"
+            className="w-full h-64 object-contain p-4 group-hover:scale-105 transition-transform duration-300"
+            loading="lazy"
           />
           
-          {/* Badge da categoria com emoji */}
-          <Badge className="absolute top-3 left-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg animate-bounce-in">
+          <Badge className="absolute top-3 left-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white">
             {getCategoryIcon(product.category)} {product.category}
           </Badge>
           
-          {/* Botão de favorito */}
           <Button
             variant="ghost"
             size="sm"
             onClick={handleLike}
-            className={`absolute top-3 right-3 p-2 rounded-full transition-all duration-300 ${
+            className={`absolute top-3 right-3 p-2 rounded-full transition-colors duration-200 ${
               isLiked 
-                ? 'bg-red-500 text-white scale-110' 
+                ? 'bg-red-500 text-white' 
                 : 'bg-white/80 text-gray-600 hover:bg-red-50 hover:text-red-500'
             }`}
           >
-            <Heart className={`w-4 h-4 ${isLiked ? 'fill-current animate-pulse' : ''}`} />
+            <Heart className={`w-4 h-4 ${isLiked ? 'fill-current' : ''}`} />
           </Button>
-          
-          {/* Efeito de brilho */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
         </div>
         
-        <CardContent className="p-6 bg-gradient-to-br from-white/80 to-gray-50/80 backdrop-blur-sm">
-          <h3 className="font-bold text-lg mb-3 line-clamp-2 group-hover:gradient-text transition-all duration-300">
+        <CardContent className="p-6 bg-white">
+          <h3 className="font-bold text-lg mb-3 line-clamp-2 group-hover:text-purple-600 transition-colors">
             {product.title}
           </h3>
           
@@ -88,33 +84,32 @@ const ProductCard = ({ product }: ProductCardProps) => {
               {[...Array(5)].map((_, i) => (
                 <Star
                   key={i}
-                  className={`w-4 h-4 transition-all duration-300 ${
+                  className={`w-4 h-4 ${
                     i < Math.floor(product.rating.rate)
-                      ? 'fill-yellow-400 text-yellow-400 animate-pulse'
+                      ? 'fill-yellow-400 text-yellow-400'
                       : 'text-gray-300'
                   }`}
                 />
               ))}
             </div>
             <span className="text-sm text-gray-600 font-medium">
-              {product.rating.rate} ({product.rating.count} reviews)
+              {product.rating.rate} ({product.rating.count})
             </span>
           </div>
           
           <div className="flex items-center justify-between">
-            <p className="text-3xl font-bold bg-gradient-to-r from-green-500 to-blue-500 bg-clip-text text-transparent">
+            <p className="text-3xl font-bold text-green-600">
               ${product.price.toFixed(2)}
             </p>
-            <Sparkles className="w-5 h-5 text-yellow-500 animate-pulse" />
           </div>
         </CardContent>
       </Link>
       
-      <CardFooter className="p-6 pt-0 space-x-3 bg-gradient-to-br from-white/80 to-gray-50/80">
+      <CardFooter className="p-6 pt-0 space-x-3 bg-white">
         <Link to={`/produto/${product.id}`} className="flex-1">
           <Button 
             variant="outline" 
-            className="w-full border-purple-200 hover:bg-purple-50 hover:border-purple-300 transition-all duration-300 transform hover:scale-105"
+            className="w-full border-purple-200 hover:bg-purple-50 transition-colors"
           >
             👀 Ver detalhes
           </Button>
@@ -123,8 +118,8 @@ const ProductCard = ({ product }: ProductCardProps) => {
         <Button 
           onClick={handleAddToCart}
           disabled={isAdding}
-          className={`bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105 ${
-            isAdding ? 'animate-pulse scale-95' : ''
+          className={`bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transition-colors ${
+            isAdding ? 'opacity-75' : ''
           }`}
         >
           {isAdding ? (
@@ -142,6 +137,8 @@ const ProductCard = ({ product }: ProductCardProps) => {
       </CardFooter>
     </Card>
   );
-};
+});
+
+ProductCard.displayName = 'ProductCard';
 
 export default ProductCard;
