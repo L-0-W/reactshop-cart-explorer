@@ -84,6 +84,7 @@ src/
 
 ## 👥 Autor
 
+Luiz Felipe de Oliveira
 Desenvolvido como trabalho prático de Frontend React.
 
 ---
