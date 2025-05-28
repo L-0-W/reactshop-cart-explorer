@@ -5,6 +5,7 @@ import { fetchProducts, fetchProductsByCategory } from '../services/api';
 import ProductCard from '../components/ProductCard';
 import LoadingSpinner from '../components/LoadingSpinner';
 import Header from '../components/Header';
+import MostPurchasedSection from '../components/MostPurchasedSection';
 import { ShoppingBag } from 'lucide-react';
 
 const Products = () => {
@@ -68,6 +69,9 @@ const Products = () => {
           </div>
         </div>
 
+        {/* Seção de Itens Mais Comprados */}
+        {selectedCategory === 'all' && <MostPurchasedSection />}
+
         {loading ? (
           <LoadingSpinner />
         ) : (
@@ -80,6 +84,18 @@ const Products = () => {
                 </span>
               </div>
             </div>
+            
+            {/* Título da seção de todos os produtos */}
+            {selectedCategory === 'all' && (
+              <div className="text-center mb-6 sm:mb-8">
+                <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                  📦 Todos os Produtos 📦
+                </h2>
+                <p className="text-sm sm:text-base text-gray-600 mt-2">
+                  Explore nossa coleção completa
+                </p>
+              </div>
+            )}
             
             {/* Grid responsivo otimizado */}
             <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 sm:gap-4 lg:gap-6">
