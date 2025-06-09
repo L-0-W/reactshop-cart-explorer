@@ -61,11 +61,11 @@ const ProductCard = memo(({ product }: ProductCardProps) => {
           <img
             src={product.image}
             alt={product.title}
-            className="w-full h-40 sm:h-48 md:h-56 lg:h-64 object-contain p-2 sm:p-3 lg:p-4 group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-32 xs:h-36 sm:h-40 md:h-48 lg:h-56 xl:h-60 object-contain p-1.5 xs:p-2 sm:p-3 lg:p-4 group-hover:scale-105 transition-transform duration-300"
             loading="lazy"
           />
           
-          <Badge className="absolute top-2 left-2 sm:top-3 sm:left-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs">
+          <Badge className="absolute top-1 left-1 xs:top-2 xs:left-2 sm:top-3 sm:left-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs">
             {getCategoryIcon(product.category)} 
             <span className="hidden sm:inline ml-1">{getCategoryName(product.category)}</span>
           </Badge>
@@ -74,27 +74,27 @@ const ProductCard = memo(({ product }: ProductCardProps) => {
             variant="ghost"
             size="sm"
             onClick={handleLike}
-            className={`absolute top-2 right-2 sm:top-3 sm:right-3 p-1.5 sm:p-2 rounded-full transition-colors duration-200 ${
+            className={`absolute top-1 right-1 xs:top-2 xs:right-2 sm:top-3 sm:right-3 p-1 xs:p-1.5 sm:p-2 rounded-full transition-colors duration-200 ${
               isLiked 
                 ? 'bg-red-500 text-white' 
                 : 'bg-white/80 text-gray-600 hover:bg-red-50 hover:text-red-500'
             }`}
           >
-            <Heart className={`w-3 h-3 sm:w-4 sm:h-4 ${isLiked ? 'fill-current' : ''}`} />
+            <Heart className={`w-3 h-3 xs:w-3.5 xs:h-3.5 sm:w-4 sm:h-4 ${isLiked ? 'fill-current' : ''}`} />
           </Button>
         </div>
         
-        <CardContent className="p-3 sm:p-4 lg:p-6 bg-white flex-1 flex flex-col">
-          <h3 className="font-bold text-sm sm:text-base lg:text-lg mb-2 sm:mb-3 line-clamp-2 group-hover:text-purple-600 transition-colors flex-1">
+        <CardContent className="p-2 xs:p-3 sm:p-4 lg:p-6 bg-white flex-1 flex flex-col">
+          <h3 className="font-bold text-xs xs:text-sm sm:text-base lg:text-lg mb-1.5 xs:mb-2 sm:mb-3 line-clamp-2 group-hover:text-purple-600 transition-colors flex-1">
             {product.title}
           </h3>
           
-          <div className="flex items-center space-x-1 sm:space-x-2 mb-3 sm:mb-4">
+          <div className="flex items-center space-x-1 xs:space-x-1.5 sm:space-x-2 mb-2 xs:mb-3 sm:mb-4">
             <div className="flex items-center">
               {[...Array(5)].map((_, i) => (
                 <Star
                   key={i}
-                  className={`w-3 h-3 sm:w-4 sm:h-4 ${
+                  className={`w-2.5 h-2.5 xs:w-3 xs:h-3 sm:w-4 sm:h-4 ${
                     i < Math.floor(product.rating.rate)
                       ? 'fill-yellow-400 text-yellow-400'
                       : 'text-gray-300'
@@ -108,15 +108,15 @@ const ProductCard = memo(({ product }: ProductCardProps) => {
           </div>
           
           <div className="flex items-center justify-between">
-            <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-green-600">
+            <p className="text-base xs:text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold text-green-600">
               R$ {(product.price * 5.5).toFixed(2)}
             </p>
           </div>
         </CardContent>
       </Link>
       
-      <CardFooter className="p-3 sm:p-4 lg:p-6 pt-0 space-x-2 sm:space-x-3 bg-white flex-col sm:flex-row gap-2 sm:gap-0">
-        <Link to={`/produto/${product.id}`} className="w-full sm:flex-1">
+      <CardFooter className="p-2 xs:p-3 sm:p-4 lg:p-6 pt-0 space-x-1.5 xs:space-x-2 sm:space-x-3 bg-white flex-col xs:flex-row gap-1.5 xs:gap-2 sm:gap-0">
+        <Link to={`/produto/${product.id}`} className="w-full xs:flex-1">
           <Button 
             variant="outline" 
             className="w-full border-purple-200 hover:bg-purple-50 transition-colors text-xs sm:text-sm"
@@ -130,20 +130,20 @@ const ProductCard = memo(({ product }: ProductCardProps) => {
         <Button 
           onClick={handleAddToCart}
           disabled={isAdding}
-          className={`w-full sm:w-auto bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transition-colors text-xs sm:text-sm ${
+          className={`w-full xs:w-auto bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transition-colors text-xs sm:text-sm ${
             isAdding ? 'opacity-75' : ''
           }`}
           size="sm"
         >
           {isAdding ? (
-            <div className="flex items-center space-x-1 sm:space-x-2">
-              <div className="w-3 h-3 sm:w-4 sm:h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+            <div className="flex items-center space-x-1 xs:space-x-1.5 sm:space-x-2">
+              <div className="w-2.5 h-2.5 xs:w-3 xs:h-3 sm:w-4 sm:h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
               <span className="hidden sm:inline">Adicionando...</span>
               <span className="sm:hidden">...</span>
             </div>
           ) : (
             <>
-              <ShoppingCart className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              <ShoppingCart className="w-2.5 h-2.5 xs:w-3 xs:h-3 sm:w-4 sm:h-4 mr-1 xs:mr-1.5 sm:mr-2" />
               <span className="hidden sm:inline">Adicionar</span>
               <span className="sm:hidden">+</span>
             </>

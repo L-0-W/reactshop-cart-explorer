@@ -53,7 +53,7 @@ const ProductDetail = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
         <Header onCategoryChange={() => {}} selectedCategory="all" />
         <LoadingSpinner />
       </div>
@@ -62,10 +62,10 @@ const ProductDetail = () => {
 
   if (!product) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
         <Header onCategoryChange={() => {}} selectedCategory="all" />
-        <div className="container mx-auto px-4 py-8 text-center">
-          <h1 className="text-2xl font-bold text-gray-800 mb-4">Produto não encontrado</h1>
+        <div className="container mx-auto px-3 xs:px-4 sm:px-6 py-6 xs:py-8 text-center">
+          <h1 className="text-xl xs:text-2xl font-bold text-gray-800 mb-4">Produto não encontrado</h1>
           <Link to="/">
             <Button>Voltar à loja</Button>
           </Link>
@@ -75,41 +75,41 @@ const ProductDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
       <Header onCategoryChange={() => {}} selectedCategory="all" />
       
-      <main className="container mx-auto px-4 py-8">
-        <Link to="/" className="inline-flex items-center text-blue-600 hover:text-blue-800 mb-6">
-          <ArrowLeft className="w-4 h-4 mr-2" />
+      <main className="container mx-auto px-3 xs:px-4 sm:px-6 py-4 xs:py-6 sm:py-8">
+        <Link to="/" className="inline-flex items-center text-blue-600 hover:text-blue-800 mb-4 xs:mb-6 text-sm xs:text-base">
+          <ArrowLeft className="w-3 h-3 xs:w-4 xs:h-4 mr-1 xs:mr-2" />
           Voltar à loja
         </Link>
 
         <Card className="overflow-hidden">
           <CardContent className="p-0">
-            <div className="grid md:grid-cols-2 gap-8 p-8">
-              <div className="space-y-4">
+            <div className="grid md:grid-cols-2 gap-4 xs:gap-6 sm:gap-8 p-3 xs:p-4 sm:p-6 lg:p-8">
+              <div className="space-y-3 xs:space-y-4">
                 <img
                   src={product.image}
                   alt={product.title}
-                  className="w-full max-w-md mx-auto object-contain bg-gray-50 rounded-lg"
+                  className="w-full max-w-sm xs:max-w-md mx-auto object-contain bg-gray-50 rounded-lg"
                 />
               </div>
 
-              <div className="space-y-6">
+              <div className="space-y-3 xs:space-y-4 sm:space-y-6">
                 <div>
-                  <Badge className="mb-3 bg-blue-100 text-blue-800">
+                  <Badge className="mb-2 xs:mb-3 bg-blue-100 text-blue-800 text-xs xs:text-sm">
                     {getCategoryName(product.category)}
                   </Badge>
-                  <h1 className="text-3xl font-bold text-gray-800 mb-4">
+                  <h1 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-800 mb-3 xs:mb-4">
                     {product.title}
                   </h1>
                   
-                  <div className="flex items-center space-x-2 mb-4">
+                  <div className="flex items-center space-x-1.5 xs:space-x-2 mb-3 xs:mb-4">
                     <div className="flex items-center">
                       {[...Array(5)].map((_, i) => (
                         <Star
                           key={i}
-                          className={`w-5 h-5 ${
+                          className={`w-4 h-4 xs:w-5 xs:h-5 ${
                             i < Math.floor(product.rating.rate)
                               ? 'fill-yellow-400 text-yellow-400'
                               : 'text-gray-300'
@@ -117,29 +117,29 @@ const ProductDetail = () => {
                         />
                       ))}
                     </div>
-                    <span className="text-sm text-gray-600">
+                    <span className="text-xs xs:text-sm text-gray-600">
                       {product.rating.rate} ({product.rating.count} avaliações)
                     </span>
                   </div>
 
-                  <p className="text-4xl font-bold text-blue-600 mb-6">
+                  <p className="text-2xl xs:text-3xl sm:text-4xl font-bold text-blue-600 mb-4 xs:mb-6">
                     R$ {(product.price * 5.5).toFixed(2)}
                   </p>
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-semibold mb-3">Descrição</h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <h3 className="text-base xs:text-lg font-semibold mb-2 xs:mb-3">Descrição</h3>
+                  <p className="text-sm xs:text-base text-gray-600 leading-relaxed">
                     {product.description}
                   </p>
                 </div>
 
-                <div className="flex space-x-4">
+                <div className="flex space-x-2 xs:space-x-4">
                   <Button
                     onClick={handleAddToCart}
-                    className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                    className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-sm xs:text-base"
                   >
-                    <ShoppingCart className="w-5 h-5 mr-2" />
+                    <ShoppingCart className="w-4 h-4 xs:w-5 xs:h-5 mr-1.5 xs:mr-2" />
                     Adicionar ao Carrinho
                   </Button>
                 </div>
