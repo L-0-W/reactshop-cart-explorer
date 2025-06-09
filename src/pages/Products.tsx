@@ -57,9 +57,9 @@ const Products = () => {
       <Header onCategoryChange={handleCategoryChange} selectedCategory={selectedCategory} />
       
       <main className="container mx-auto px-2 xs:px-3 sm:px-4 lg:px-6 py-3 xs:py-4 sm:py-6 lg:py-8">
-        {/* Hero Section responsivo */}
+        {/* Hero Section responsivo sem fundo branco */}
         <div className="text-center mb-6 xs:mb-8 sm:mb-10 lg:mb-12">
-          <div className="bg-white/80 backdrop-blur-sm rounded-lg xs:rounded-xl sm:rounded-2xl p-3 xs:p-4 sm:p-6 lg:p-8 shadow-lg border border-white/40">
+          <div className="p-3 xs:p-4 sm:p-6 lg:p-8">
             <div className="flex justify-center mb-2 xs:mb-3 sm:mb-4">
               <ShoppingBag className="w-6 h-6 xs:w-8 xs:h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-purple-600" />
             </div>
