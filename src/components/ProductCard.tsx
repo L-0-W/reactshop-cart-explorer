@@ -44,6 +44,16 @@ const ProductCard = memo(({ product }: ProductCardProps) => {
     }
   };
 
+  const getCategoryName = (category: string) => {
+    switch(category) {
+      case 'electronics': return 'Eletrônicos';
+      case 'jewelery': return 'Joias';
+      case "men's clothing": return 'Roupas Masculinas';
+      case "women's clothing": return 'Roupas Femininas';
+      default: return category;
+    }
+  };
+
   return (
     <Card className="group overflow-hidden hover:shadow-lg transition-shadow duration-300 bg-white/90 backdrop-blur-sm border border-gray-200 h-full flex flex-col">
       <Link to={`/produto/${product.id}`} className="flex-1 flex flex-col">
@@ -57,7 +67,7 @@ const ProductCard = memo(({ product }: ProductCardProps) => {
           
           <Badge className="absolute top-2 left-2 sm:top-3 sm:left-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs">
             {getCategoryIcon(product.category)} 
-            <span className="hidden sm:inline ml-1">{product.category}</span>
+            <span className="hidden sm:inline ml-1">{getCategoryName(product.category)}</span>
           </Badge>
           
           <Button
@@ -99,7 +109,7 @@ const ProductCard = memo(({ product }: ProductCardProps) => {
           
           <div className="flex items-center justify-between">
             <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-green-600">
-              ${product.price.toFixed(2)}
+              R$ {(product.price * 5.5).toFixed(2)}
             </p>
           </div>
         </CardContent>

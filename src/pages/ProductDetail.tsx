@@ -41,6 +41,16 @@ const ProductDetail = () => {
     }
   };
 
+  const getCategoryName = (category: string) => {
+    switch(category) {
+      case 'electronics': return 'Eletrônicos';
+      case 'jewelery': return 'Joias';
+      case "men's clothing": return 'Roupas Masculinas';
+      case "women's clothing": return 'Roupas Femininas';
+      default: return category;
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50">
@@ -88,7 +98,7 @@ const ProductDetail = () => {
               <div className="space-y-6">
                 <div>
                   <Badge className="mb-3 bg-blue-100 text-blue-800">
-                    {product.category}
+                    {getCategoryName(product.category)}
                   </Badge>
                   <h1 className="text-3xl font-bold text-gray-800 mb-4">
                     {product.title}
@@ -113,7 +123,7 @@ const ProductDetail = () => {
                   </div>
 
                   <p className="text-4xl font-bold text-blue-600 mb-6">
-                    ${product.price.toFixed(2)}
+                    R$ {(product.price * 5.5).toFixed(2)}
                   </p>
                 </div>
 

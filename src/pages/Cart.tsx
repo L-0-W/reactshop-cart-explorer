@@ -10,6 +10,16 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 const Cart = () => {
   const { items, removeFromCart, updateQuantity, getCartTotal } = useCart();
 
+  const getCategoryName = (category: string) => {
+    switch(category) {
+      case 'electronics': return 'Eletrônicos';
+      case 'jewelery': return 'Joias';
+      case "men's clothing": return 'Roupas Masculinas';
+      case "women's clothing": return 'Roupas Femininas';
+      default: return category;
+    }
+  };
+
   if (items.length === 0) {
     return (
       <div className="min-h-screen bg-gray-50">
@@ -66,10 +76,10 @@ const Cart = () => {
                         {item.product.title}
                       </h3>
                       <p className="text-sm text-gray-600 mt-1">
-                        {item.product.category}
+                        {getCategoryName(item.product.category)}
                       </p>
                       <p className="text-lg font-bold text-blue-600 mt-2">
-                        ${item.product.price.toFixed(2)}
+                        R$ {(item.product.price * 5.5).toFixed(2)}
                       </p>
                     </div>
 
@@ -120,7 +130,7 @@ const Cart = () => {
                         {item.product.title} x{item.quantity}
                       </span>
                       <span className="font-semibold">
-                        ${(item.product.price * item.quantity).toFixed(2)}
+                        R$ {(item.product.price * item.quantity * 5.5).toFixed(2)}
                       </span>
                     </div>
                   ))}
@@ -130,7 +140,7 @@ const Cart = () => {
                   <div className="flex justify-between text-lg font-bold">
                     <span>Total:</span>
                     <span className="text-blue-600">
-                      ${getCartTotal().toFixed(2)}
+                      R$ {(getCartTotal() * 5.5).toFixed(2)}
                     </span>
                   </div>
                 </div>

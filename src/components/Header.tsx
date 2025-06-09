@@ -37,6 +37,16 @@ const Header = memo(({ onCategoryChange, selectedCategory }: HeaderProps) => {
 
   const cartItemsCount = getCartItemsCount();
 
+  const getCategoryName = (category: string) => {
+    switch(category) {
+      case 'electronics': return 'Eletrônicos';
+      case 'jewelery': return 'Joias';
+      case "men's clothing": return 'Roupas Masculinas';
+      case "women's clothing": return 'Roupas Femininas';
+      default: return category;
+    }
+  };
+
   return (
     <header className="bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 text-white shadow-lg sticky top-0 z-50">
       <div className="container mx-auto px-3 sm:px-4 lg:px-6 py-3 sm:py-4">
@@ -72,10 +82,10 @@ const Header = memo(({ onCategoryChange, selectedCategory }: HeaderProps) => {
                       {category === "women's clothing" && '👗'} 
                       {' '}
                       <span className="hidden sm:inline">
-                        {category.charAt(0).toUpperCase() + category.slice(1)}
+                        {getCategoryName(category)}
                       </span>
                       <span className="sm:hidden">
-                        {category.slice(0, 8)}...
+                        {getCategoryName(category).slice(0, 8)}...
                       </span>
                     </SelectItem>
                   ))}

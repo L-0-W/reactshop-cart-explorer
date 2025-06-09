@@ -42,6 +42,16 @@ const Products = () => {
 
   const productCount = useMemo(() => products.length, [products.length]);
 
+  const getCategoryDisplayName = (category: string) => {
+    switch(category) {
+      case 'electronics': return 'Eletrônicos';
+      case 'jewelery': return 'Joias';
+      case "men's clothing": return 'Roupas Masculinas';
+      case "women's clothing": return 'Roupas Femininas';
+      default: return category;
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
       <Header onCategoryChange={handleCategoryChange} selectedCategory={selectedCategory} />
@@ -62,7 +72,7 @@ const Products = () => {
               Descubra produtos incríveis com os melhores preços! ✨
               {selectedCategory !== 'all' && (
                 <span className="block mt-2 text-base sm:text-lg lg:text-xl font-semibold text-purple-600">
-                  📂 Categoria: {selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1)}
+                  📂 Categoria: {getCategoryDisplayName(selectedCategory)}
                 </span>
               )}
             </p>
