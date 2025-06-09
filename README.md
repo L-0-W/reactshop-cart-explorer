@@ -78,10 +78,15 @@ src/
 Luiz Felipe de Oliveira Mello
 
 Cassiano Socorro
+
 Arthur Varizi
+
 Caio Braba
+
 João Luiz
+
 Gabriel Costa
+
 Daniel 
 
 ---
