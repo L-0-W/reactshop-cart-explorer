@@ -13,7 +13,6 @@ Um protótipo funcional de loja virtual desenvolvido com React e TypeScript, con
 
 ## 🛠️ Tecnologias Utilizadas
 
-- **React 18** com TypeScript
 - **React Router** para navegação
 - **Axios** para consumo da API
 - **Context API** para gerenciamento de estado
@@ -37,14 +36,6 @@ Um protótipo funcional de loja virtual desenvolvido com React e TypeScript, con
 - `GET /products/:id` - Detalhes de um produto específico
 - `GET /products/categories` - Lista todas as categorias
 - `GET /products/category/:category` - Produtos de uma categoria específica
-
-## 🎨 Design e UX
-
-- Interface moderna com gradientes e animações
-- Cards de produtos com hover effects
-- Loading states para melhor experiência
-- Sistema de navegação intuitivo
-- Feedback visual para ações do usuário
 
 ## 📱 Funcionalidades do Carrinho
 
@@ -82,11 +73,14 @@ src/
 └── App.tsx             # Componente principal
 ```
 
-## 👥 Autor
+## 👥 Grupo
 
-Luiz Felipe de Oliveira
-Desenvolvido como trabalho prático de Frontend React.
+Luiz Felipe de Oliveira Mello
+Cassiano Socorro
+Arthur Varizi
+Caio Braba
+João Luiz
+Gabriel Costa
+Daniel 
 
 ---
-
-**ReactShop** - Demonstrando as melhores práticas de desenvolvimento React com uma aplicação real e funcional.
