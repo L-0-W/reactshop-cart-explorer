@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useMemo } from 'react';
 import { Product } from '../types';
 import { fetchProducts, fetchProductsByCategory } from '../services/api';
@@ -93,7 +94,6 @@ const Products = () => {
       <Header onCategoryChange={handleCategoryChange} selectedCategory={selectedCategory} />
       
       <main className="container mx-auto px-4 xs:px-6 sm:px-8 py-4 xs:py-6 sm:py-8">
-        {/* Hero Section responsivo sem fundo branco */}
         <div className="text-center mb-8 xs:mb-10 sm:mb-12">
           <div className="p-4 xs:p-6 sm:p-8">
             <div className="flex justify-center mb-4">
@@ -115,14 +115,12 @@ const Products = () => {
           </div>
         </div>
 
-        {/* Seção de Itens Mais Comprados */}
         {selectedCategory === 'all' && <MostPurchasedSection />}
 
         {loading ? (
           <LoadingSpinner />
         ) : (
           <>
-            {/* Contador de produtos e ordenação responsivos */}
             <div className="flex flex-col sm:flex-row items-center justify-between mb-6 xs:mb-8 gap-4">
               <div className="bg-white/80 backdrop-blur-sm rounded-full px-4 xs:px-6 py-2 shadow-md border border-white/40">
                 <span className="text-sm xs:text-base font-medium text-gray-700">
@@ -130,7 +128,6 @@ const Products = () => {
                 </span>
               </div>
               
-              {/* Seletor de ordenação */}
               <div className="bg-white/80 backdrop-blur-sm rounded-lg p-1 border border-white/40 shadow-md">
                 <Select onValueChange={handleSortChange} value={sortBy}>
                   <SelectTrigger className="w-48 xs:w-56 sm:w-64 bg-transparent border-none text-sm">
@@ -163,7 +160,6 @@ const Products = () => {
               </div>
             </div>
             
-            {/* Título da seção de todos os produtos */}
             {selectedCategory === 'all' && (
               <div className="text-center mb-6 xs:mb-8">
                 <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
@@ -175,7 +171,6 @@ const Products = () => {
               </div>
             )}
             
-            {/* Grid responsivo otimizado */}
             <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 xs:gap-6 lg:gap-8 place-items-center">
               {sortedProducts.map((product) => (
                 <ProductCard key={product.id} product={product} />
