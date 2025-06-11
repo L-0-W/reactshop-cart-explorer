@@ -15,7 +15,6 @@ Um protótipo funcional de loja virtual desenvolvido com React e TypeScript, con
 
 ## 🛠️ Tecnologias Utilizadas
 
-- **React 18** com TypeScript
 - **React Router** para navegação e roteamento
 - **Axios** para consumo da API
 - **Context API** para gerenciamento de estado global
@@ -105,12 +104,10 @@ src/
 
 ## 🚀 Funcionalidades Avançadas
 
-- **Cache de API**: Sistema de cache local para melhor performance
 - **Roteamento por URL**: Categorias acessíveis via parâmetros de URL
 - **Responsividade Total**: Adaptação para todas as telas
 - **Estados de Loading**: Indicadores visuais durante carregamento
 - **Tratamento de Erros**: Páginas 404 e estados de erro
-- **Otimização**: Lazy loading de imagens e memo em componentes
 
 ## 👥 Grupo
 
@@ -121,7 +118,3 @@ src/
 - João Luiz
 - Gabriel Costa
 - Daniel
-
----
-
-**Projeto desenvolvido para fins educacionais - Demonstração de conceitos React avançados**
