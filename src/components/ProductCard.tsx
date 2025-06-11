@@ -115,40 +115,42 @@ const ProductCard = memo(({ product }: ProductCardProps) => {
         </CardContent>
       </Link>
       
-      <CardFooter className="p-3 xs:p-4 pt-0 bg-white flex flex-col xs:flex-row gap-2">
-        <Link to={`/produto/${product.id}`} className="w-full xs:flex-1">
+      <CardFooter className="p-3 xs:p-4 pt-0 bg-white">
+        <div className="w-full flex flex-col gap-2">
+          <Link to={`/produto/${product.id}`} className="w-full">
+            <Button 
+              variant="outline" 
+              className="w-full border-purple-200 hover:bg-purple-50 transition-colors text-xs xs:text-sm"
+              size="sm"
+            >
+              <span className="hidden sm:inline">👀 Ver detalhes</span>
+              <span className="sm:hidden">👀 Detalhes</span>
+            </Button>
+          </Link>
+          
           <Button 
-            variant="outline" 
-            className="w-full border-purple-200 hover:bg-purple-50 transition-colors text-xs xs:text-sm"
+            onClick={handleAddToCart}
+            disabled={isAdding}
+            className={`w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transition-colors text-xs xs:text-sm ${
+              isAdding ? 'opacity-75' : ''
+            }`}
             size="sm"
           >
-            <span className="hidden sm:inline">👀 Ver detalhes</span>
-            <span className="sm:hidden">👀 Detalhes</span>
+            {isAdding ? (
+              <div className="flex items-center justify-center space-x-1.5">
+                <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                <span className="hidden sm:inline">Adicionando...</span>
+                <span className="sm:hidden">...</span>
+              </div>
+            ) : (
+              <div className="flex items-center justify-center space-x-1.5">
+                <ShoppingCart className="w-3 h-3 xs:w-4 xs:h-4" />
+                <span className="hidden sm:inline">Adicionar</span>
+                <span className="sm:hidden">+</span>
+              </div>
+            )}
           </Button>
-        </Link>
-        
-        <Button 
-          onClick={handleAddToCart}
-          disabled={isAdding}
-          className={`w-full xs:w-auto bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transition-colors text-xs xs:text-sm ${
-            isAdding ? 'opacity-75' : ''
-          }`}
-          size="sm"
-        >
-          {isAdding ? (
-            <div className="flex items-center space-x-1.5">
-              <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-              <span className="hidden sm:inline">Adicionando...</span>
-              <span className="sm:hidden">...</span>
-            </div>
-          ) : (
-            <>
-              <ShoppingCart className="w-3 h-3 xs:w-4 xs:h-4 mr-1.5" />
-              <span className="hidden sm:inline">Adicionar</span>
-              <span className="sm:hidden">+</span>
-            </>
-          )}
-        </Button>
+        </div>
       </CardFooter>
     </Card>
   );
