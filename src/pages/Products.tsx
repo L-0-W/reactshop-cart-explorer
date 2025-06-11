@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Product } from '../types';
 import { fetchProducts, fetchProductsByCategory } from '../services/api';
 import ProductCard from '../components/ProductCard';
@@ -16,10 +17,12 @@ import {
 } from '@/components/ui/select';
 
 const Products = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [sortBy, setSortBy] = useState('default');
+  const selectedCategory = searchParams.get('categoria') || 'all';
+  const sortBy = searchParams.get('ordenar') || 'default';
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -45,11 +48,29 @@ const Products = () => {
   }, [selectedCategory]);
 
   const handleCategoryChange = (category: string) => {
-    setSelectedCategory(category);
+    const newSearchParams = new URLSearchParams(searchParams);
+    if (category === 'all') {
+      newSearchParams.delete('categoria');
+    } else {
+      newSearchParams.set('categoria', category);
+    }
+    if (sortBy !== 'default') {
+      newSearchParams.set('ordenar', sortBy);
+    }
+    setSearchParams(newSearchParams);
   };
 
   const handleSortChange = (sort: string) => {
-    setSortBy(sort);
+    const newSearchParams = new URLSearchParams(searchParams);
+    if (selectedCategory !== 'all') {
+      newSearchParams.set('categoria', selectedCategory);
+    }
+    if (sort === 'default') {
+      newSearchParams.delete('ordenar');
+    } else {
+      newSearchParams.set('ordenar', sort);
+    }
+    setSearchParams(newSearchParams);
   };
 
   const sortedProducts = useMemo(() => {
