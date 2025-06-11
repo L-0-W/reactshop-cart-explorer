@@ -4,10 +4,9 @@ import { Product } from '../types';
 
 const api = axios.create({
   baseURL: 'https://fakestoreapi.com',
-  timeout: 10000, // 10 segundos de timeout
+  timeout: 10000,
 });
 
-// Cache simples para evitar requisições desnecessárias
 const cache = new Map();
 
 export const fetchProducts = async (): Promise<Product[]> => {
@@ -23,6 +22,17 @@ export const fetchProducts = async (): Promise<Product[]> => {
 
 export const fetchProduct = async (id: number): Promise<Product> => {
   const cacheKey = `product-${id}`;
+  if (cache.has(cacheKey)) {
+    return cache.get(cacheKey);
+  }
+  
+  const response = await api.get(`/products/${id}`);
+  cache.set(cacheKey, response.data);
+  return response.data;
+};
+
+export const fetchProductCharacteristics = async (id: number): Promise<Product> => {
+  const cacheKey = `characteristics-${id}`;
   if (cache.has(cacheKey)) {
     return cache.get(cacheKey);
   }

@@ -3,10 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Star, ShoppingCart } from 'lucide-react';
 import { Product } from '../types';
-import { fetchProduct } from '../services/api';
+import { fetchProductCharacteristics } from '../services/api';
 import { useCart } from '../contexts/CartContext';
 import LoadingSpinner from '../components/LoadingSpinner';
 import Header from '../components/Header';
+import ProductCharacteristics from '../components/ProductCharacteristics';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
@@ -23,7 +24,7 @@ const ProductDetail = () => {
       
       try {
         setLoading(true);
-        const productData = await fetchProduct(parseInt(id));
+        const productData = await fetchProductCharacteristics(parseInt(id));
         setProduct(productData);
       } catch (error) {
         console.error('Error loading product:', error);
@@ -147,6 +148,8 @@ const ProductDetail = () => {
             </div>
           </CardContent>
         </Card>
+
+        <ProductCharacteristics product={product} />
       </main>
     </div>
   );
